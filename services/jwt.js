@@ -8,7 +8,7 @@ export const token = {
       email: user.email,
     };
     console.log(userForToken);
-    return jwt.sign(userForToken, secret, { expiresIn: "1m" });
+    return jwt.sign(userForToken, secret, { expiresIn: "10m" });
   },
   async validate(req, res, next) {
     const token = req.headers?.authorization?.split(" ")[1];
