@@ -17,13 +17,13 @@ export const token = {
         if (err) {
           return res
             .status(401)
-            .json({ success: false, message: "Invalid or Expired token" });
+            .json({ success: false, message: "Token no válido o caducado" });
         }
         req.decoded = decoded;
         next();
       });
     } else {
-      res.status(401).json({ success: false, message: "No token provided" });
+      res.status(401).json({ success: false, message: "No se proporciona ningún token" });
     }
   },
 };

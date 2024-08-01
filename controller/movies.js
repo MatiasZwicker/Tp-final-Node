@@ -6,23 +6,20 @@ export const movieController = {
     movieCollection
       ? res.status(200).json({
           success: true,
-          message: "List of movies",
+          message: "Lista de peliculas",
           data: movieCollection,
         })
       : res
           .status(404)
-          .json({ success: false, message: "Movies database empty" });
+          .json({ success: false, message: "Base de datos de peliculas vacia" });
   },
   async getByTitle(req, res) {
     const { title } = req.query;
     if (!title)
       res
         .status(400)
-        .json({ success: false, message: "Missing 'title' query param" });
-    // const movies = await Movie.find({
-    //   $text: { $search: title },
-    // });
-
+        .json({ success: false, message: "Falta el parámetro de consulta 'título'" });
+  
     try {
       const movies = await Movie.find({
         title: { $regex: title, $options: "i" },
@@ -30,19 +27,19 @@ export const movieController = {
       if (!movies.length) {
         return res.status(404).json({
           success: false,
-          message: `No movies with ${title}  in the title`,
+          message: `No hay películas con ${title}  en el título`,
         });
       }
 
       return res.status(200).json({
         success: true,
-        message: "Movies by query title",
+        message: "Películas por título de consulta",
         data: movies,
       });
     } catch (err) {
       return res
         .status(500)
-        .json({ success: false, message: `Internal Error: ${err.message}` });
+        .json({ success: false, message: `Error interno: ${err.message}` });
     }
   },
 
@@ -61,7 +58,7 @@ export const movieController = {
       const savedMovie = await newMovie.save();
       res
         .status(200)
-        .json({ success: true, message: "Movie created", data: savedMovie });
+        .json({ success: true, message: "Película creada", data: savedMovie });
     } catch (err) {
       res.status(400).json({ success: false, message: err.message });
     }
@@ -85,7 +82,7 @@ export const movieController = {
       if (!isValidOperation) {
         return res.status(400).json({
           success: false,
-          message: "Invalid field in the request body. Operation aborted.",
+          message: "Campo no válido en el cuerpo de la solicitud. Operación abortada",
         });
       }
 
@@ -95,16 +92,16 @@ export const movieController = {
       if (!movie) {
         return res.status(404).json({
           success: false,
-          message: `Movie Not Found`,
+          message: `Película no encontrada`,
         });
       }
       res
         .status(200)
-        .json({ success: true, message: "Movie updated", data: movie });
+        .json({ success: true, message: "Película actualizada", data: movie });
     } catch (error) {
       res.status(500).json({
         success: false,
-        message: `Internal Server Error ${error.message}`,
+        message: `Error Interno del Servidor ${error.message}`,
       });
     }
   },
@@ -115,7 +112,7 @@ export const movieController = {
       if (!movie) {
         return res.status(404).json({
           success: false,
-          message: `Movie Not Found`,
+          message: `Película no encontrada`,
         });
       }
       res.send(204);

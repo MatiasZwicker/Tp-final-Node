@@ -13,8 +13,8 @@ const movieSchema = mongoose.Schema(
     year: {
       type: Number,
       required: true,
-      min: [1896, "Year must be al least 1896"],
-      max: [currentYear, `Year cannot exceed ${currentYear}`],
+      min: [1896, "El año debe ser al menos 1896."],
+      max: [currentYear, `El año no puede exceder ${currentYear}`],
     },
     director: { type: String, required: true, trim: true },
     duration: { type: Number, required: true, trim: true },
@@ -31,6 +31,5 @@ movieSchema.set("toJSON", {
     delete ret.__v;
   },
 });
-// movieSchema.index({ title: "text" });
 
 export const Movie = mongoose.model("Movie", movieSchema);

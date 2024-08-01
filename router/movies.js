@@ -6,7 +6,7 @@ router.get("/", token.validate, movieController.getAll);
 router.get("/s", movieController.getByTitle);
 router.get("/:id", (req, res) => {
   const { id } = req.params;
-  res.send(`List a movie by id: ${id}`);
+  res.send(`Listar una película por id: ${id}`);
 });
 router.post("/", movieController.createOne);
 router.patch("/:id", movieController.updateMovie);

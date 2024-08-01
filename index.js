@@ -13,9 +13,9 @@ const PORT = process.env.PORT ?? 3000;
 app.listen(PORT, (err) => {
   console.log(
     err
-      ? `Error launching server: ${err.message}`
-      : `Server running on port http://127.0.0.1:${PORT} \n
-    Ctrl + C to exit...`
+      ? `Error al iniciar el servidor: ${err.message}`
+      : `Servidor ejecutándose en el puerto http://127.0.0.1:${PORT} \n
+    Ctrl + C para salir...`
   );
 });
 

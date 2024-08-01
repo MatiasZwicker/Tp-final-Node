@@ -13,11 +13,11 @@ export const userController = {
       const savedUser = await newUser.save();
       res
         .status(201)
-        .json({ sucess: true, message: "User registered", data: savedUser });
+        .json({ sucess: true, message: "Usuario registrado", data: savedUser });
     } catch (err) {
       res
         .status(500)
-        .json({ sucess: false, message: "Internal Error: " + err.message });
+        .json({ sucess: false, message: "Error interno: " + err.message });
     }
   },
 
@@ -26,7 +26,7 @@ export const userController = {
     if (!user.length) {
       return res
         .status(401)
-        .json({ success: false, message: "Incorrect Email or Password" });
+        .json({ success: false, message: "Email o contraseña incorrecto" });
     }
 
     const hashedPassword = user[0].password;
@@ -34,12 +34,12 @@ export const userController = {
     if (!match) {
       return res
         .status(401)
-        .json({ success: false, message: "Incorrect Email or Password" });
+        .json({ success: false, message: "Email o contraseña incorrecto" });
     }
 
     const accessToken = await token.generate(user[0]);
     res
       .status(200)
-      .json({ sucess: true, message: "user logged in", data: accessToken });
+      .json({ sucess: true, message: "Inicio sesion correctamente el usuario", data: accessToken });
   },
 };
